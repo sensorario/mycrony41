@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\BindRequest;
-use App\Resources\SomeObject;
+use App\Resources\FooBarRequest;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,9 +13,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends Controller
 {
     /** @Route("/", name="default") */
-    public function index(BindRequest $binder)
-    {
-        $binder->bind(\App\Resources\SomeObject::class);
+    public function index(
+        BindRequest $binder,
+        $resource = \App\Resources\FooBarRequest::class
+    ) {
+        $binder->bind($resource);
 
         if ($binder->isSuccess()) {
             return new JsonResponse([

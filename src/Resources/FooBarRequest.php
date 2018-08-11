@@ -4,7 +4,7 @@ namespace App\Resources;
 
 use Sensorario\Resources\Resource;
 
-class SomeObject
+class FooBarRequest
     extends Resource
     implements \JsonSerializable
 {
