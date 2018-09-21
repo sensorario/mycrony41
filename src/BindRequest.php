@@ -28,8 +28,9 @@ class BindRequest
         try {
             $queryString =  $this->requestStack
                 ->getCurrentRequest()
-                ->query->all();
-            $this->value = $requestObject::box($queryString);
+                ->getContent();
+                //->request->all();
+            $this->value = $requestObject::box(json_decode($queryString, true));
             $this->success = true;
         } catch (\Exception $exception) {
             $this->logger->error($exception->getMessage());
