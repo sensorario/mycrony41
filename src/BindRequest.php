@@ -13,6 +13,8 @@ class BindRequest
 
     private $success;
 
+    private $value;
+
     public function __construct(
         RequestStack $requestStack,
         LoggerInterface $logger
@@ -27,7 +29,7 @@ class BindRequest
             $queryString =  $this->requestStack
                 ->getCurrentRequest()
                 ->query->all();
-            $requestObject::box($queryString);
+            $this->value = $requestObject::box($queryString);
             $this->success = true;
         } catch (\Exception $exception) {
             $this->logger->error($exception->getMessage());
@@ -38,5 +40,10 @@ class BindRequest
     public function isSuccess()
     {
         return $this->success == true;
+    }
+
+    public function value()
+    {
+        return $this->value;
     }
 }

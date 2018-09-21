@@ -20,9 +20,7 @@ class DefaultController extends Controller
         $binder->bind($resource);
 
         if ($binder->isSuccess()) {
-            return new JsonResponse([
-                'success' => true,
-            ]);
+            return new JsonResponse($binder->value());
         }
 
         return new JsonResponse([
